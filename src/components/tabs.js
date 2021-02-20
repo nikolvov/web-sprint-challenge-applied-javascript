@@ -26,5 +26,3 @@ const tabsAppender = (selector) => {
 }
 
 export { Tabs, tabsAppender }
-
-const niko = nikolvov;
