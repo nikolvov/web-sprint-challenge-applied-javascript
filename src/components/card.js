@@ -37,14 +37,15 @@ const Card = (article) => {
   imgContainer.appendChild(img);
   author.appendChild(name);
 
-  headline.textContent = `${article.headline}`;
-  img.textContent = `${article.authorPhoto}`;
-  name.textContent = `By ${article.authorName}`;
+  headline.textContent = `${headline}`;
+  img.textContent = `${authorPhoto}`;
+  name.textContent = `By ${authorName}`;
 
   divCard.addEventListener('click', () => {
     console.log(headline);
   });
 
+  console.log(divCard)
   return divCard
 }
 
@@ -56,19 +57,43 @@ const cardAppender = (selector) => {
   // However, the articles do not come organized in a single, neat array. Inspect the response closely!
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
-  //
+  // axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+  //   .then(response => {
+  //     const cards = document.querySelector('.cards-container')
+  //     response.data.forEach(article => {
+  //       const art = Card(article)
+  //       cards.appendChild(art)
+  //     })
+  //   })
+  //   .catch(error => {
+  //     console.log(error)
+  //   })
+  // axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+  //   .then(response => {
+  //     const cards = document.querySelector('.cards-container')
+  //     const articles = response.data;
+  //     articles.fetch(article => {
+  //       const component = Card(data);
+  //       cards.appendChild(component);
+  //     })
+  //   });
+  // articles.forEach((article) => {
+  //   axios.get(`https://lambda-times-api.herokuapp.com/articles`).then((response) => {
+  //     const cards = document.querySelector('.cards-container')
+  //     const data = response.data;
+  //     const arrayCard = Card(data);
+  //     cards.appendChild(arrayCard);
+  //   });
+  // });
   axios.get(`https://lambda-times-api.herokuapp.com/articles`)
     .then(response => {
+      console.log(response);
       const cards = document.querySelector('.cards-container')
       const articles = response.data;
-      articles.forEach(article => {
-        const component = Card(data);
+      articles.map(article => {
+        const component = Card(article);
         cards.appendChild(component);
       })
     });
-    // .catch(error => {
-    //   console.log(error);
-    // })
 }
-
 export { Card, cardAppender }
