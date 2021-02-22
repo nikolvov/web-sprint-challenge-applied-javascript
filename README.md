@@ -75,7 +75,11 @@ There are two possible ways to submit this project to Canvas. Lambda Staff will 
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What is the DOM?
+The dom stands for Document Object Model. It is an API for HTML. It is what you access and manipulate to change the HTML without hard code changes to HTML.
 2. What is an event?
+Events are something that happens in whatever system that is being programmed and are usually an action of some sort. For example, like a click on a page.
 3. What is an event listener?
+Event listeners listen for an event and whatever callback to initiate when the event happens.
 4. Why would we convert a NodeList into an Array?
 5. What is a component?
+A component is made up of HTML, CSS and JS. You bring it all together to reuse it all in whatever website or application that is being worked on. 

@@ -20,7 +20,9 @@ const Card = (article) => {
   // </div>
   //
   const divCard = document.createElement('div');
+  // console.log(divCard)
   const headline = document.createElement('div');
+  // console.log(headline)
   const author = document.createElement('div');
   const imgContainer = document.createElement('div');
   const img = document.createElement('img');
@@ -37,15 +39,14 @@ const Card = (article) => {
   imgContainer.appendChild(img);
   author.appendChild(name);
 
-  headline.textContent = `${headline}`;
-  img.textContent = `${authorPhoto}`;
+  headline.textContent = `${articles.headline}`;
+  img.src = articles.authorPhoto;
   name.textContent = `By ${authorName}`;
 
   divCard.addEventListener('click', () => {
     console.log(headline);
   });
 
-  console.log(divCard)
   return divCard
 }
 
@@ -57,43 +58,65 @@ const cardAppender = (selector) => {
   // However, the articles do not come organized in a single, neat array. Inspect the response closely!
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
+
+  axios.get('https://lambda-times-api.herokuapp.com/articles')
+    .then(response => {
+      const cards = document.querySelector('.cards-container');
+      console.log(cards)
+      const articles = response.data;
+      console.log(articles);
+      const bootCard = Card(articles.bootstrap);
+      const jsCard = Card(articles.javascript);
+      const jqCard = Card(articles.jquery);
+      const nodeCard = Card(articles.node);
+      const techCard = Card(articles.technology);
+      cards.appendChild(bootCard);
+      cards.appendChild(jsCard);
+      cards.appendChild(jqCard);
+      cards.appendChild(nodeCard);
+      cards.appendChild(techCard);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
   // axios.get(`https://lambda-times-api.herokuapp.com/articles`)
   //   .then(response => {
   //     const cards = document.querySelector('.cards-container')
   //     response.data.forEach(article => {
-  //       const art = Card(article)
+  //       const bootCard = Card(artic le)
   //       cards.appendChild(art)
   //     })
   //   })
   //   .catch(error => {
   //     console.log(error)
   //   })
-  // axios.get(`https://lambda-times-api.herokuapp.com/articles`)
-  //   .then(response => {
-  //     const cards = document.querySelector('.cards-container')
-  //     const articles = response.data;
-  //     articles.fetch(article => {
-  //       const component = Card(data);
-  //       cards.appendChild(component);
-  //     })
-  //   });
-  // articles.forEach((article) => {
-  //   axios.get(`https://lambda-times-api.herokuapp.com/articles`).then((response) => {
-  //     const cards = document.querySelector('.cards-container')
-  //     const data = response.data;
-  //     const arrayCard = Card(data);
-  //     cards.appendChild(arrayCard);
-  //   });
-  // });
-  axios.get(`https://lambda-times-api.herokuapp.com/articles`)
-    .then(response => {
-      console.log(response);
-      const cards = document.querySelector('.cards-container')
-      const articles = response.data;
-      articles.map(article => {
-        const component = Card(article);
-        cards.appendChild(component);
-      })
-    });
+  // // axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+  // //   .then(response => {
+  // //     const cards = document.querySelector('.cards-container')
+  // //     const articles = response.data;
+  // //     articles.fetch(article => {
+  // //       const component = Card(data);
+  // //       cards.appendChild(component);
+  // //     })
+  // //   });
+  // // articles.forEach((article) => {
+  // //   axios.get(`https://lambda-times-api.herokuapp.com/articles`).then((response) => {
+  // //     const cards = document.querySelector('.cards-container')
+  // //     const data = response.data;
+  // //     const bootCard = Card(data.bootstrap);
+  // //     cards.appendChild(arrayCard);
+  // //   });
+  // // });
+  // // axios.get(`https://lambda-times-api.herokuapp.com/articles`)
+  // //   .then(response => {
+  // //     console.log()
+  // //     const cards = document.querySelector('.cards-container')
+  // //     const articles = response.data;
+  // //     articles.map(article => {
+  // //       const component = Card(article);
+  // //       cards.appendChild(component);
+  // //     })
+  // //   });
 }
 export { Card, cardAppender }
